@@ -1,0 +1,17 @@
+// get all users
+GET http://localhost:8000/getUsers
+
+// create new user
+POST http://localhost:8000/createUsers
+content-type: application/json
+
+{
+    "name": "sample",
+    "time": "Wed, 21 Oct 2015 18:27:50 GMT"
+}
+
+// update user
+PUT http://localhost:8000/updateUser
+
+// delete user
+DELETE http://localhost:8000/deleteUser
