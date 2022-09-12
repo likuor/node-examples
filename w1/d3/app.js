@@ -1,49 +1,60 @@
-// import express
 const express = require('express');
-const morgan = require('morgan');
 const fs = require('fs');
+const bodyParser = require('body-parser');
 
-// create an express app
-const app = express();
+const server = express();
 
-// use middlewares
-app.use(morgan('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+server.use(bodyParser.json());
 
-const jsonData = fs.readFileSync('../d2/users.json', 'utf-8', (error, data) => {
-  return data;
-});
-
-// middleware function
-const logger = (req, res, next) => {
-  console.log('Logging...');
-  next();
+const getUsers = async () => {
+  const data = await fs.readFileSync('users.json', 'utf-8');
+  return JSON.parse(data).users;
 };
 
-let body = '';
+const updateUsers = async (users) => {
+  await fs.writeFileSync('users.json', JSON.stringify({ users: users }));
+  return { message: 'file updated' };
+};
 
-// routes
-app.get('/', logger, (req, res) => {
-  res.send(jsonData);
+server.get('/users', async (request, response) => {
+  const users = await getUsers();
+  console.log('users', users);
+  response.json(users);
 });
 
-app.post('/add', (req, res) => {
-  const users = [...jsonData.users];
-  // console.log(users);
-  // const users = [...jsonData.users];
-  // const newUser = { ...jsonBody, id: users.length + 1 };
-  // const updatedUsers = [...users, newUser];
-  // console.log('body', updatedUsers);
-  // res.send(updatedUsers.toString());
+server.post('/users', async (request, response) => {
+  console.log('body', request.body);
+  const body = request.body;
+  const users = await getUsers();
+  const newUser = { ...body, id: users.length + 1 };
+  const updatedUsers = [...users, newUser];
+  updateUsers(updatedUsers);
+
+  response.json(newUser);
 });
 
-// app.post('/new', logger, (req, res) => {
-//   console.log('body', req.body);
-//   res.send('add a new pet');
-// });
-
-// initialize the server
-app.listen(8000, () => {
-  console.log('Server is running on port 8000');
+server.put('/users', async (request, response) => {
+  const body = request.body;
+  const users = await getUsers();
+  const updatedUsers = users.map((user) => {
+    if (user.id === body.id) {
+      return { ...body };
+    }
+    return user;
+  });
+  updateUsers(updatedUsers);
+  response.json({ message: 'User updated' });
 });
+
+server.delete('/users', async (req, res) => {
+  const body = req.body;
+  const users = await getUsers();
+  const updatedUsers = users.filter((user) => user.id !== body.id);
+  const result = await updateUsers(updatedUsers);
+  console.log('result', result);
+  if (result.message === 'file updated') {
+    res.json({ message: 'User deleted' });
+  }
+});
+
+server.listen(3000, () => console.log('server is running on port 3000'));

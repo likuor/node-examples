@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # get all users
 # GET http://localhost:8000
 
@@ -41,3 +42,28 @@ content-type: application/json
 # {
 #     "id":1
 # }
+=======
+# POST http://localhost:3000/users
+# Content-Type: application/json
+
+# {
+#     "name":"Arthur",
+#     "country": "Brazil"
+# }
+
+# PUT http://localhost:3000/users
+# Content-Type: application/json
+
+# {
+#     "id":1,
+#     "name":"Tomoyuki",
+#     "country": "Japan"
+# }
+
+DELETE http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "id":4
+}
+>>>>>>> 35e34c113454d5cc67aaf3d2d61ef3dabc4e14e3
