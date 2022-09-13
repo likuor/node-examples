@@ -1,29 +1,56 @@
-const cookieParser = require("cookie-parser");
-const express = require("express");
-
+const cookieParser = require('cookie-parser');
+const express = require('express');
 const app = express();
+const morgan = require('morgan');
+
 app.use(cookieParser());
+app.set('view engine', 'ejs');
+app.use(morgan('dev'));
+app.use(express.urlencoded({ extended: true }));
 
-app.get("/login", (req, res) => {
-  res.cookie("username", "bob");
-  res.send("You are logged in");
+app.get('/', (req, res) => {
+  const userData = req.cookies.user;
+  const userInfo = req.body;
+  console.log(userInfo);
+
+  if (!userData) return res.redirect('/register');
+  if (!userData.isLoggedin) return res.send('You need to login');
+  res.render('home', { name: userData.name });
 });
 
-app.get("/", (req, res) => {
-  console.log("cookies", req.cookies);
-  if (!req.cookies.username) return res.send("You are not logged in");
-  //   console.log("cookie", req.headers.cookie);
-  //   const cookie = req.headers.cookie;
-  //   const cookieArr = cookie.split("; ");
-  //   console.log("arr", cookieArr);
-  //   const cookieObj = {};
-  //   cookieArr.forEach((cookieEl) => {
-  //     cookieKeyVal = cookieEl.split("=");
-  //     cookieObj[cookieKeyVal[0]] = cookieKeyVal[1];
-  //   });
-  //   console.log("parse", cookieObj);
-  //   console.log("username", cookieObj["username"]);
-  res.send("You are logged in");
+app.get('/register', (req, res) => {
+  res.render('register');
 });
 
-app.listen("3002", console.log("server running 3002"));
+app.post('/register', (req, res) => {
+  const user = { ...req.body, isLoggedin: false };
+  res.cookie('user', user);
+  res.redirect('/login');
+});
+
+app.get('/login', (req, res) => {
+  res.render('login');
+});
+
+app.post('/login', (req, res) => {
+  const userInfo = req.body;
+  let userData = req.cookies.user;
+
+  if (
+    userInfo.email !== userData.email ||
+    userInfo.password !== userData.password
+  )
+    return res.send('login is failed');
+
+  userData = { ...userData, isLoggedin: true };
+  res.cookie('user', userData);
+  res.redirect('/');
+});
+
+app.post('/logout', (req, res) => {
+  res.clearCookie('user');
+  console.log('logout is success');
+  res.redirect('/register');
+});
+
+app.listen('8000', console.log('server running port at 8000'));

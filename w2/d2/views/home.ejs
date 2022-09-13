@@ -10,9 +10,10 @@
     <a href="/">Home</a>
     <a href="/login">Login</a>
     <a href="/register">Register</a>
-    <a href="/profile">Profile</a>
     <span>Logged in as:</span>
-    <span>Username</span>
-    <button>Logout</button>
+    <span><%= name %></span>
+    <form method="post" action="/logout">
+      <button>logout</button>
+    </form>
   </body>
 </html>
