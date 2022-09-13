@@ -1,48 +1,3 @@
-<<<<<<< HEAD
-# get all users
-# GET http://localhost:8000
-
-
-# GET http://localhost:8000/new
-
-
-POST http://localhost:8000/add
-content-type: application/json
-
-{
-    "name": "David",
-    "country": "Czech Republic"
-}
-
-# create new user
-
-# POST http://localhost:8000/
-# content-type: application/json
-
-# {
-#     "name": "David",
-#     "country": "Czech Republic"
-# }
-
-# // update user
-# PUT http://localhost:8000/updateUser
-# content-type: application/json
-
-# {
-#     "id":1,
-#     "name":"Arthur",
-#     "country":"Canada"
-# }
-
-
-# // delete user
-# DELETE http://localhost:8000/deleteUser
-# content-type: application/json
-
-# {
-#     "id":1
-# }
-=======
 # POST http://localhost:3000/users
 # Content-Type: application/json
 
@@ -66,4 +21,3 @@ Content-Type: application/json
 {
     "id":4
 }
->>>>>>> 35e34c113454d5cc67aaf3d2d61ef3dabc4e14e3

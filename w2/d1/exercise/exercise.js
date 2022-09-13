@@ -15,8 +15,6 @@
  *
  */
 
-<<<<<<< HEAD:w1/d3/exercise.js
-const pets = [{ name: 'Zoey', age: 1, type: 'dog' }];
-=======
-const pets = [{ id: 1, name: "Zoey", age: 1, type: "dog" }];
->>>>>>> 35e34c113454d5cc67aaf3d2d61ef3dabc4e14e3:w2/d1/exercise.js
+const pets = [{ id: 1, name: 'Zoey', age: 1, type: 'dog' }];
+
+module.exports = pets;
