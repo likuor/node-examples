@@ -58,7 +58,7 @@ app.get("/profile", (req, res) => {
 
 ```js
 app.post("/logout", (req, res) => {
-  res.clearCookies();
+  res.clearCookie("username");
   res.send("You are logged out");
 });
 ```
@@ -85,8 +85,8 @@ Let's code!
 
 - Step 9: In the form, include method POST and action to `/login` endpoint
 
-- Step 10: Create a route `/login` that expects a POST request and respond with cookies if email and password are matching with stored data.
+- Step 10: Create a route `/login` that expects a POST request and respond with cookies if username and password are matching with stored data.
 
 - Step 11: Create a button to user logout. It should be in a form with method POST and action to `/logout` endpoint
 
-- Step 12: Create a route `/logout` that expects a POST request and redirect the client to `/`
+- Step 12: Create a route `/logout` that expects a POST request and redirect the client to `/login`
