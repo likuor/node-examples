@@ -2,14 +2,10 @@
   "name": "d2",
   "version": "1.0.0",
   "description": "",
-  "main": "app.js",
+  "main": "exercise.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-<<<<<<< HEAD
-    "start": "nodemon app.js"
-=======
     "start": "nodemon exercise.js"
->>>>>>> 32ec30e357018da23e2b04fb8b065d9d48d589de
   },
   "keywords": [],
   "author": "",
@@ -19,13 +15,9 @@
     "cookie-parser": "^1.4.6",
     "ejs": "^3.1.8",
     "express": "^4.18.1",
-<<<<<<< HEAD
-    "morgan": "^1.10.0",
-=======
     "morgan": "^1.10.0"
   },
   "devDependencies": {
->>>>>>> 32ec30e357018da23e2b04fb8b065d9d48d589de
     "nodemon": "^2.0.19"
   }
 }
