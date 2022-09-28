@@ -44,6 +44,10 @@ ON table1.column1 = table2.column1;
 
 ## Modify data in SQL
 
+> **WARNING 1**: Do not run any of the following commands without conditional statements. You don't want to accidentally update or delete all your data!
+
+> **WARNING 2**: The following commands are destructive and will modify your data. No way to reverse it! Use with caution!
+
 ### UPDATE
 
 ```sql

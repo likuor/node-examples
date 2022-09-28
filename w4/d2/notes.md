@@ -1,20 +1,28 @@
-```text
-Person table
-id = Primary Key
-/ id / name/
-/ 1 / Alice/
-/ 2 / Bob/
-/ 3 / Carol/
-/ 4 / Dave/
+# Examples
 
-Pet table
-/ id / name / owner_id (FK)/
-/ 1 / Rex / 1 /
-/ 2 / Fluffy / 1 /
-/ 3 / Spot / 2 /
-/ 4 / Fido / 2 /
-/ 5 / Rover / 3 /
-/ 6 / Spike /  /
+## Person table
+
+```text
+
+id is a primary key <- / id  / name  /
+                       / --- / ----- /
+                       / 1   / Alice /
+                       / 2   / Bob   /
+                       / 3   / Carol /
+                       / 4   / Dave  /
+```
+
+## Pet table
+
+```text
+/ id / name   / owner_id / -> owner_id is a foreign key
+/ -- / ------ / -------- /
+/ 1  / Rex    / 1        /
+/ 2  / Fluffy / 1        /
+/ 3  / Spot   / 2        /
+/ 4  / Fido   / 2        /
+/ 5  / Rover  / 3        /
+/ 6  / Spike  / NULL     /
 ```
 
 ```sql
@@ -26,12 +34,13 @@ ON person.id = pet.owner_id
 ```
 
 ```text
-/ name / pet /
-/ Alice / Rex /
+/ name  / pet    /
+/ ----- / ------ /
+/ Alice / Rex    /
 / Alice / Fluffy /
-/ Bob / Spot /
-/ Bob / Fido /
-/ Carol / Rover /
+/ Bob   / Spot   /
+/ Bob   / Fido   /
+/ Carol / Rover  /
 ```
 
 ```sql
@@ -43,13 +52,14 @@ ON person.id = pet.owner_id
 ```
 
 ```text
-/ name / pet /
-/ Alice / Rex /
+/ name  / pet    /
+/ ----- / ------ /
+/ Alice / Rex    /
 / Alice / Fluffy /
-/ Bob / Spot /
-/ Bob / Fido /
-/ Carol / Rover /
-/ Dave / NULL /
+/ Bob   / Spot   /
+/ Bob   / Fido   /
+/ Carol / Rover  /
+/ Dave  / NULL   /
 ```
 
 ```sql
@@ -61,13 +71,14 @@ ON person.id = pet.owner_id
 ```
 
 ```text
-/ name / pet /
-/ Alice / Rex /
+/ name  / pet    /
+/ ----- / ------ /
+/ Alice / Rex    /
 / Alice / Fluffy /
-/ Bob / Spot /
-/ Bob / Fido /
-/ Carol / Rover /
-/ NULL / Spike /
+/ Bob   / Spot   /
+/ Bob   / Fido   /
+/ Carol / Rover  /
+/ NULL  / Spike  /
 ```
 
 ```sql
@@ -79,14 +90,15 @@ ON person.id = pet.owner_id
 ```
 
 ```text
-/ name / pet /
-/ Alice / Rex /
+/ name  / pet    /
+/ ----- / ------ /
+/ Alice / Rex    /
 / Alice / Fluffy /
-/ Bob / Spot /
-/ Bob / Fido /
-/ Carol / Rover /
-/ Dave / NULL /
-/ NULL / Spike /
+/ Bob   / Spot   /
+/ Bob   / Fido   /
+/ Carol / Rover  /
+/ Dave  / NULL   /
+/ NULL  / Spike  /
 ```
 
 ```sql
@@ -99,7 +111,8 @@ WHERE person.name IS NULL
 ```
 
 ```text
-/ name / pet /
+/ name / pet   /
+/ ---- / ----- /
 / NULL / Spike /
 ```
 
@@ -113,7 +126,8 @@ WHERE pet.name IS NULL
 ```
 
 ```text
-/ name / pet /
+/ name / pet  /
+/ ---- / ---- /
 / Dave / NULL /
 ```
 
@@ -127,8 +141,9 @@ WHERE person.name IS NULL OR pet.name IS NULL
 ```
 
 ```text
-/ name / pet /
-/ Dave / NULL /
+/ name / pet   /
+/ ---- / ----- /
+/ Dave / NULL  /
 / NULL / Spike /
 ```
 
@@ -142,13 +157,14 @@ WHERE id = 6
 ```text
 Select * from pet;
 
-/ id / name / owner_id /
-/ 1 / Rex / 1 /
-/ 2 / Fluffy / 1 /
-/ 3 / Spot / 2 /
-/ 4 / Fido / 2 /
-/ 5 / Rover / 3 /
-/ 6 / Spike / 4 /
+/ id / name   / owner_id /
+/ -- / ------ / -------- /
+/ 1  / Rex    / 1        /
+/ 2  / Fluffy / 1        /
+/ 3  / Spot   / 2        /
+/ 4  / Fido   / 2        /
+/ 5  / Rover  / 3        /
+/ 6  / Spike  / 4        /
 ```
 
 ```sql
@@ -160,10 +176,11 @@ WHERE id = 6
 ```text
 Select * from pet;
 
-/ id / name / owner_id /
-/ 1 / Rex / 1 /
-/ 2 / Fluffy / 1 /
-/ 3 / Spot / 2 /
-/ 4 / Fido / 2 /
-/ 5 / Rover / 3 /
+/ id / name  / owner_id /
+/ -- / ----- / -------- /
+/ 1 / Rex    / 1        /
+/ 2 / Fluffy / 1        /
+/ 3 / Spot   / 2        /
+/ 4 / Fido   / 2        /
+/ 5 / Rover  / 3        /
 ```
