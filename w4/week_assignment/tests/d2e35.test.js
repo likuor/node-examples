@@ -1,6 +1,6 @@
 const { queryDb } = require("../testHelper");
 
-describe("queries_in/11_get_total_assignment_duration_day.sql", () => {
+describe("queries_in/12_get_instructors_assisted_class.sql", () => {
   test("8 rows", async () => {
     const res = await queryDb(
       "queries_in/12_get_instructors_assisted_class.sql"

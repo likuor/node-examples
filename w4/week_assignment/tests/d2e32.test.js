@@ -1,6 +1,6 @@
 const { queryDb } = require("../testHelper");
 
-describe("queries_in/07_get_avg_request_wait_time.sql", () => {
+describe("queries_in/09_get_avg_total_assistance_requests_class.sql", () => {
   test("1 row", async () => {
     const res = await queryDb(
       "queries_in/09_get_avg_total_assistance_requests_class.sql"
