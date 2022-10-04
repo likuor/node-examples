@@ -1,25 +1,25 @@
 const express = require("express");
 const { Pool } = require("pg");
 require("dotenv").config();
-// const { MongoClient, ServerApiVersion } = require("mongodb");
-// const uri =
-//   "mongodb+srv://adlascio:mongo@cluster0.ydeuggz.mongodb.net/?retryWrites=true&w=majority";
-// const client = new MongoClient(uri, {
-//   useNewUrlParser: true,
-//   useUnifiedTopology: true,
-//   serverApi: ServerApiVersion.v1,
-// });
-// client.connect(async (err) => {
-//   const collection = client.db("sample_mflix").collection("movies");
-//   // perform actions on the collection object
-//   const movies = await collection.findOne({}).toArray();
-//   console.log("movies", movies.length);
-//   client.close();
-// });
+const { MongoClient, ServerApiVersion } = require("mongodb");
+const uri =
+  "mongodb+srv://adlascio:mongo@cluster0.ydeuggz.mongodb.net/?retryWrites=true&w=majority";
+const client = new MongoClient(uri, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+  serverApi: ServerApiVersion.v1,
+});
 
 const app = express();
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.get("/planets", async (req, res) => {
+  const collection = client.db("sample_guides").collection("planets");
+  // perform actions on the collection object
+  const planets = await collection.find({}).toArray();
+  res.json(planets);
+});
 
 app.get("/students", (req, res) => {
   const pool = new Pool({
